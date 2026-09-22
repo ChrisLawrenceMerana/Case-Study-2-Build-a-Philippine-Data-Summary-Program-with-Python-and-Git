@@ -36,3 +36,11 @@ def build_pivot_table(
     out_path.parent.mkdir(parents=True, exist_ok=True)
     pivot.to_csv(out_path)
     return pivot
+
+def pivot_interior_sum(pivot: pd.DataFrame, margin_label: str = "Total") -> float:
+    """Sum interior cells of a margins-included pivot table for validation."""
+    interior = (
+        pivot.drop(index=margin_label, errors="ignore")
+        .drop(columns=margin_label, errors="ignore")
+    )
+    return float(interior.to_numpy().sum())
