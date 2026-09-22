@@ -61,6 +61,22 @@ def generate_grouped_two_summary(
     output_path: Optional[str] = "output/grouped_two.csv",
 ) -> pd.DataFrame:
 
+    """Groups by two categories and shows row counts and measure sums.
+
+    Parameters:
+    df: pd.DataFrame
+        - Dataset containing customs records.
+    group_cols: list of str, optional
+        - Categorical columns for grouping. Defaults to ["countryorigin_iso3", "tq"].
+    measure_col: str, default "dutiablevaluephp"
+        - Numerical column to aggregate.
+    output_path: str, optional
+        - CSV destination path. If None, file export is skipped.
+
+    Returns:
+    pd.DataFrame
+        - Aggregated summary table indexed by the grouping categories."""
+    
     if group_cols is None:
         group_cols = ["countryorigin_iso3", "tq"]
 
