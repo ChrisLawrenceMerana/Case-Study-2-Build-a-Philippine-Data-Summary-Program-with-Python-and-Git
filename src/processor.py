@@ -1,6 +1,6 @@
 """Module for data processing, filtering, and summary generation."""
 
-from typing import Optional
+from typing import List, Optional
 import pandas as pd
 
 
