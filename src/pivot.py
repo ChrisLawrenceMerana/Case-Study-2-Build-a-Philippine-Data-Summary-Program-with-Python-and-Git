@@ -19,7 +19,6 @@ def build_pivot_table(
     working = df[[index_col, columns_col, value_col]].copy()
     working[index_col] = working[index_col].fillna(missing_label)
     working[columns_col] = working[columns_col].fillna(missing_label)
-
     pivot = pd.pivot_table(
         working,
         index=index_col,
