@@ -110,3 +110,12 @@ def run_pipeline() -> None:
         output_path=str(pivot_out),
     )
     print(f"Created: {pivot_out}")
+
+    # 4. top10.csv (top 10 groups by measure sum)
+    top10_out = output_dir / "top10.csv"
+    top10_df = top10(
+        grouped_df,
+        sort_col="measure_sum",
+        output_path=str(top10_out),
+    )
+    print(f"Created: {top10_out}")
