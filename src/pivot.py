@@ -1,7 +1,6 @@
 from pathlib import Path
 import pandas as pd
 
-
 def build_pivot_table(
     df: pd.DataFrame,
     index_col: str,
