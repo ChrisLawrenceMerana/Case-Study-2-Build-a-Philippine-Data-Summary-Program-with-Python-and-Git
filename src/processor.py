@@ -1,8 +1,8 @@
 """Module for data processing, filtering, and summary generation."""
 
+from pathlib import Path
 from typing import List, Optional
 import pandas as pd
-
 
 def generate_grouped_summary(
     df: pd.DataFrame,
@@ -10,33 +10,10 @@ def generate_grouped_summary(
     measure_col: str = "dutiablevaluephp",
     output_path: Optional[str] = "output/grouped.csv",
 ) -> pd.DataFrame:
-    """Group filtered customs data by category and compute summary metrics.
-
-    Calculates the total row count, valid measure count, sum, and mean
-    for the specified numerical measure per category group. Explicitly handles
-    missing category values as a distinct group without dropping them.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Filtered DataFrame containing customs records.
-    group_col : str, default "countryorigin_iso3"
-        The categorical column name used for grouping.
-    measure_col : str, default "dutiablevaluephp"
-        The numerical column name to aggregate.
-    output_path : Optional[str], default "output/grouped.csv"
-        File path to save the generated CSV. If None, file is not written.
-
-    Returns
-    -------
-    pd.DataFrame
-        Summary table indexed by the grouping category with aggregated metrics.
-    """
-    # Ensure missing categorical values are preserved
+    """Group by the first category; show row count, valid measure count, sum, and mean."""
     working_df = df.copy()
     working_df[group_col] = working_df[group_col].fillna("MISSING").astype(str)
 
-    # Perform named aggregations
     grouped_df = (
         working_df.groupby(group_col, dropna=False)
         .agg(
@@ -49,10 +26,11 @@ def generate_grouped_summary(
     )
 
     if output_path:
-        grouped_df.to_csv(output_path, index=False)
+        out_file = Path(output_path).resolve()
+        out_file.parent.mkdir(parents=True, exist_ok=True)
+        grouped_df.to_csv(out_file, index=False)
 
     return grouped_df
-
 
 def generate_grouped_two_summary(
     df: pd.DataFrame,
@@ -60,23 +38,7 @@ def generate_grouped_two_summary(
     measure_col: str = "dutiablevaluephp",
     output_path: Optional[str] = "output/grouped_two.csv",
 ) -> pd.DataFrame:
-
-    """Groups by two categories and shows row counts and measure sums.
-
-    Parameters:
-    df: pd.DataFrame
-        - Dataset containing customs records.
-    group_cols: list of str, optional
-        - Categorical columns for grouping. Defaults to ["countryorigin_iso3", "tq"].
-    measure_col: str, default "dutiablevaluephp"
-        - Numerical column to aggregate.
-    output_path: str, optional
-        - CSV destination path. If None, file export is skipped.
-
-    Returns:
-    pd.DataFrame
-        - Aggregated summary table indexed by the grouping categories."""
-    
+    """Group by both categories; show row count and measure sum using named aggregations."""
     if group_cols is None:
         group_cols = ["countryorigin_iso3", "tq"]
 
@@ -93,6 +55,8 @@ def generate_grouped_two_summary(
     )
 
     if output_path:
-        grouped_two_df.to_csv(output_path, index=False)
+        out_file = Path(output_path).resolve()
+        out_file.parent.mkdir(parents=True, exist_ok=True)
+        grouped_two_df.to_csv(out_file, index=False)
 
     return grouped_two_df
