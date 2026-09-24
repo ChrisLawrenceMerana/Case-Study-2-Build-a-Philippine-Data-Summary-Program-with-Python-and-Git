@@ -131,3 +131,6 @@ def run_pipeline() -> None:
     print(f"Created: {heatmap_out}")
 
     print(f"\nAll deliverables successfully generated in: {output_dir}")
+
+if __name__ == "__main__":
+    run_pipeline()
