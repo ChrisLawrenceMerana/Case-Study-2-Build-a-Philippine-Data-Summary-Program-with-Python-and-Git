@@ -15,6 +15,10 @@ if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
 import config
+from graphs import plot_pivot_heatmap, plot_top10_bar
+from pivot import build_pivot_table
+from processor import generate_grouped_summary, generate_grouped_two_summary
+from top10 import top10
 
 def load_and_validate_data() -> pd.DataFrame:
     """Load, validate schema, and filter customs data according to config specifications.
@@ -68,3 +72,20 @@ def load_and_validate_data() -> pd.DataFrame:
             )
 
     return df
+
+def run_pipeline() -> None:
+    """Execute the end-to-end data pipeline and generate all deliverables."""
+    df = load_and_validate_data()
+
+    output_dir = Path(config.OUTPUT_DIR).resolve()
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # 1. grouped.csv (group by the first category; row count, valid count, sum, mean)
+    grouped_out = output_dir / "grouped.csv"
+    grouped_df = generate_grouped_summary(
+        df,
+        group_col=config.GROUP_COL_ONE,
+        measure_col=config.MEASURE_COL,
+        output_path=str(grouped_out),
+    )
+    print(f"Created: {grouped_out}")
