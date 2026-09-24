@@ -89,3 +89,13 @@ def run_pipeline() -> None:
         output_path=str(grouped_out),
     )
     print(f"Created: {grouped_out}")
+
+    # 2. grouped_two.csv (group by both categories; row count, sum using named aggregations)
+    grouped_two_out = output_dir / "grouped_two.csv"
+    grouped_two_df = generate_grouped_two_summary(
+        df,
+        group_cols=config.GROUP_COLS_TWO,
+        measure_col=config.MEASURE_COL,
+        output_path=str(grouped_two_out),
+    )
+    print(f"Created: {grouped_two_out}")
