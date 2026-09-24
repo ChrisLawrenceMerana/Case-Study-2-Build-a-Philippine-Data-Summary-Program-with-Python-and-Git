@@ -119,3 +119,8 @@ def run_pipeline() -> None:
         output_path=str(top10_out),
     )
     print(f"Created: {top10_out}")
+
+    # 5. bar.png (Matplotlib bar chart of top10 values)
+    bar_out = output_dir / "bar.png"
+    plot_top10_bar(top10_df, output_path=str(bar_out))
+    print(f"Created: {bar_out}")
