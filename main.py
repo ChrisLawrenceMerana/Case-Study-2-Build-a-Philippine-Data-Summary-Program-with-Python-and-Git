@@ -124,3 +124,10 @@ def run_pipeline() -> None:
     bar_out = output_dir / "bar.png"
     plot_top10_bar(top10_df, output_path=str(bar_out))
     print(f"Created: {bar_out}")
+
+    # 6. heatmap.png (Seaborn heatmap of pivot.csv, margins excluded)
+    heatmap_out = output_dir / "heatmap.png"
+    plot_pivot_heatmap(pivot_df, margin_label="Total", output_path=str(heatmap_out))
+    print(f"Created: {heatmap_out}")
+
+    print(f"\nAll deliverables successfully generated in: {output_dir}")
