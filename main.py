@@ -99,3 +99,14 @@ def run_pipeline() -> None:
         output_path=str(grouped_two_out),
     )
     print(f"Created: {grouped_two_out}")
+
+    # 3. pivot.csv (pivot_table of measure sum across categories, including margins)
+    pivot_out = output_dir / "pivot.csv"
+    pivot_df = build_pivot_table(
+        df,
+        index_col=config.GROUP_COLS_TWO[0],
+        columns_col=config.GROUP_COLS_TWO[1],
+        value_col=config.MEASURE_COL,
+        output_path=str(pivot_out),
+    )
+    print(f"Created: {pivot_out}")
