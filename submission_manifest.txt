@@ -1,0 +1,3 @@
+Repository URL: https://github.com/ChrisLawrenceMerana/Case-Study-2-Build-a-Philippine-Data-Summary-Program-with-Python-and-Git.git
+Release Tag: v1.0
+Commit Hash: 
