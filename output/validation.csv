@@ -1,0 +1,12 @@
+check,expected,actual,tolerance,pass
+customs_2015_row_count,2236612.0,2236612.0,0.0,True
+customs_2015_col_count,30.0,30.0,0.0,True
+customs_2015_raw_measure_sum,3587267375257.0,3587267375257.0,1.0,True
+raw_equals_selected_plus_excluded,2236612.0,2236612.0,0.0,True
+vectorized_vs_loop_sum,3587267375257.0,3587267375257.0,1e-05,True
+grouped_row_counts_sum_to_selected,2236612.0,2236612.0,0.0,True
+grouped_measure_sum_reconciliation,3587267375257.0,3587267375257.0,0.01,True
+grouped_two_measure_sum_reconciliation,3587267375257.0,3587267375257.0,0.01,True
+pivot_interior_sum_reconciliation,3587267375257.0,3587267375257.0,0.01,True
+bar_plot_data_length_matches_top10,10.0,10.0,0.0,True
+bar_plot_top_value_parity,651605135422.0,651605135422.0,0.0001,True

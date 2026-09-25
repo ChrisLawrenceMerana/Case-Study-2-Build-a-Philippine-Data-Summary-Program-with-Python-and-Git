@@ -1,0 +1,7 @@
+step,operation,rule,rows_before,rows_after
+1,Load Raw Data,Read raw CSV with latin1 encoding; keep source unchanged,0,2236612
+2,Filter Records,Excluded rows outside criteria and rows with missing filter keys,2236612,2236612
+3,Generate Grouped Summary,Aggregate dutiablevaluephp by countryorigin_iso3,2236612,197
+4,Generate Grouped Two Summary,"Aggregate dutiablevaluephp by ['countryorigin_iso3', 'tq']",2236612,628
+5,Generate Pivot Table,Construct pivot table with row/col margins,2236612,198
+6,Extract Top 10,"Sort by measure_sum descending; take min(10, total_groups)",197,10
